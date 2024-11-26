@@ -40,6 +40,13 @@
       word-wrap: break-word;
       white-space: pre-wrap;
     }
+    .assignments-list {
+      margin-top: 40px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      white-space: pre-wrap; /* Ensures the format of object is kept */
+    }
   </style>
 </head>
 <body>
@@ -50,26 +57,29 @@
 
   <div class="results" id="results"></div>
 
+  <!-- New section to show the assignments as an object -->
+  <div class="assignments-list" id="assignmentsList"></div>
+
   <script>
     // List of participants (names as plain text)
     const participants = [
       "Dania", "Fadi", "Issam", "Elias", "Jelyssa", 
-      "Sarkis", "Dianne", "Nivine", "Shadi"
+      "Sarkis", "Dianne", "Nivine", "Shadi", "MarieJeanne"
     ];
 
     // Base64 encode map for each participant
-   const encodedNames = {
-  "Dania": "RGFuaWE=",
-  "Fadi": "RmFkaQ==",
-  "Issam": "SXNzYW0=",
-  "Elias": "RWxpYXM=",
-  "Jelyssa": "SmVseXNzYQ==",
-  "Sarkis": "U2Fya2lz",
-  "Dianne": "RGlhbm5l",
-  "Nivine": "Tml2aW5l",
-  "Shadi": "U2hhZGk=",
-  "MarieJeanne": "TWFyaWVKZWFubmU="
-};
+    const encodedNames = {
+      "Dania": "RGFuaWE=",
+      "Fadi": "RmFkaQ==",
+      "Issam": "SXNzYW0=",
+      "Elias": "RWxpYXM=",
+      "Jelyssa": "SmVseXNzYQ==",
+      "Sarkis": "U2Fya2lz",
+      "Dianne": "RGlhbm5l",
+      "Nivine": "Tml2aW5l",
+      "Shadi": "U2hhZGk=",
+      "MarieJeanne": "TWFyaWVKZWFubmU="
+    };
 
     // Generate the Secret Santa assignments
     function generateDraw() {
@@ -104,6 +114,23 @@
 
       resultHTML += "</ul>";
       resultsDiv.innerHTML = resultHTML;
+
+      // Show the assignments in object format (as a JS object on the page)
+      const assignmentsListDiv = document.getElementById("assignmentsList");
+
+      // Convert the assignments object to a formatted string for display
+      let assignmentsObjectString = "const secretSantaAssignments = {\n";
+      for (let giver in assignments) {
+        const receiver = assignments[giver];
+        assignmentsObjectString += `  "${giver}": "${receiver}",\n`;
+      }
+
+      // Remove the trailing comma on the last entry
+      assignmentsObjectString = assignmentsObjectString.slice(0, -2); 
+      assignmentsObjectString += "\n};";
+
+      // Display the object as a string on the page
+      assignmentsListDiv.innerHTML = `<pre>${assignmentsObjectString}</pre>`;
     }
   </script>
 
