@@ -1,18 +1,26 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Secret Santa Assignment</title>
   <style>
+    /* Fix the page to prevent scrolling */
+    html, body {
+      height: 100%;  /* Ensure the page takes full height of the viewport */
+      margin: 0;     /* Remove default margin */
+      padding: 0;    /* Remove default padding */
+      overflow: hidden; /* Prevent the page from scrolling */
+    }
+
     body {
       font-family: 'Arial', sans-serif;
       text-align: center;
-      margin: 0;
-      padding: 0;
       background: url('christmasTree.png') no-repeat center center fixed;
-      background-size: cover;
+      background-size: 120%; /* Zoom out the background image */
       color: white;
+      min-height: 100vh;  /* Ensure content fills the screen */
+      position: relative;
     }
 
     h1 {
@@ -28,6 +36,7 @@
       background-color: rgba(0, 0, 0, 0.5);
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      z-index: 2;
     }
 
     p {
@@ -79,7 +88,7 @@
       color: #ff5c8e;
     }
 
-    /* Christmas tree animation */
+    /* Snowfall animation */
     .snowfall {
       position: absolute;
       top: 0;
@@ -98,7 +107,7 @@
       }
     }
 
-    /* For the snowflakes */
+    /* Snowflakes animation */
     .snowflake {
       position: absolute;
       top: -50px;
