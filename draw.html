@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate Secret Santa Draw</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ff5c8e;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #f8c0c8;
+    }
+    .results {
+      margin-top: 30px;
+      font-size: 18px;
+    }
+    .results ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .url-link {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #00f;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Generate Secret Santa Draw</h1>
+
+  <button onclick="generateDraw()">Generate Secret Santa Draw</button>
+
+  <div class="results" id="results"></div>
+
+  <script>
+    // List of participants (names as plain text)
+    const participants = [
+      "Dania", "Fadi", "Issam", "Elias", "Jelyssa", 
+      "Sarkis", "Dianne", "Nivine", "Shadi"
+    ];
+
+    // Base64 encode map for each participant
+    const encodedNames = {
+      "Dania": "RGFuaWE=",
+      "Fadi": "RmFkaQ==",
+      "Issam": "S3NzYW0=",
+      "Elias": "RWxpYXM=",
+      "Jelyssa": "SmVseXNzYQ==",
+      "Sarkis": "U2Fya2lz",
+      "Dianne": "RGlhbm5l",
+      "Nivine": "Tml2aW5l",
+      "Shadi": "U2hhZGk="
+    };
+
+    // Generate the Secret Santa assignments
+    function generateDraw() {
+      const shuffledParticipants = [...participants];
+      let assignments = {};
+
+      // Shuffle participants to generate a random assignment
+      for (let i = shuffledParticipants.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledParticipants[i], shuffledParticipants[j]] = [shuffledParticipants[j], shuffledParticipants[i]];
+      }
+
+      // Ensure no one is assigned to themselves
+      for (let i = 0; i < participants.length; i++) {
+        const giver = participants[i];
+        const receiver = shuffledParticipants[i === participants.length - 1 ? 0 : i + 1];
+        assignments[giver] = receiver;
+      }
+
+      // Show the results with links to the index page with Base64-encoded names
+      const resultsDiv = document.getElementById("results");
+      let resultHTML = "<ul>";
+
+      for (let giver in assignments) {
+        const receiver = assignments[giver];
+        // Construct the URL with Base64 encoding for the giver
+        const url = `https://issam15ie.github.io/secret-santa/?name=${encodedNames[giver]}`;
+        resultHTML += `<li>${giver} is buying a gift for ${receiver} 
+        <a href="${url}" target="_blank">Reveal Secret Santa</a>
+        <span class="url-link">${url}</span></li>`;
+      }
+
+      resultHTML += "</ul>";
+      resultsDiv.innerHTML = resultHTML;
+    }
+  </script>
+
+</body>
+</html>
