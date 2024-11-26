@@ -283,17 +283,20 @@
 
 <script>
   // Secret Santa assignments
-  const secretSantaAssignments = {
-    "Dania": "Fadi",
-    "Fadi": "Issam",
-    "Issam": "Elias",
-    "Elias": "Jelyssa",
-    "Jelyssa": "Sarkis",
-    "Sarkis": "Dianne",
-    "Dianne": "Nivine",
-    "Nivine": "Marie-Jeanne",
-    "Shadi": "Dania"
-  };
+const secretSantaAssignments = {
+  "Dania": "Sarkis",
+  "Fadi": "Elias",
+  "Issam": "Jelyssa",
+  "Elias": "Issam",
+  "Jelyssa": "Dania",
+  "Sarkis": "MarieJeanne",
+  "Dianne": "Dianne",
+  "Nivine": "Nivine",
+  "Shadi": "Shadi",
+  "MarieJeanne": "Fadi"
+};
+
+  
 
   // Decode the Base64 name from URL
   function decodeNameFromURL() {
