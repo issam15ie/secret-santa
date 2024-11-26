@@ -42,13 +42,13 @@
 
 <div class="container">
   <h1>Secret Santa Assignment</h1>
-  <p>Click the button to reveal who you are buying a gift for!</p>
+  <p>Click the button below to reveal who you are buying a gift for!</p>
   <button onclick="revealSanta()">Reveal</button>
   <p id="assignedPerson"></p>
 </div>
 
 <script>
-  // List of participants (You can update this with the names of your participants)
+  // List of participants (update this with the names of your participants)
   const participants = [
     "Alice", "Bob", "Charlie", "David", "Eve", 
     "Frank", "Grace", "Hannah", "Ivan", "Jack"
@@ -74,10 +74,29 @@
   // Store the assignments in a variable (this will be available for the page)
   const secretSantaAssignments = assignSecretSanta();
 
-  // Function to reveal the assigned person
+  // Base64 encoding and decoding functions
+  function encodeBase64(str) {
+    return btoa(unescape(encodeURIComponent(str)));  // Encoding the name to Base64
+  }
+
+  function decodeBase64(encodedStr) {
+    return decodeURIComponent(escape(atob(encodedStr)));  // Decoding Base64 to get original name
+  }
+
+  // Get the name from the URL parameters (e.g. ?name=QWxpY2U=)
+  function getParticipantFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const encodedName = urlParams.get('name');
+    if (encodedName) {
+      return decodeBase64(encodedName);  // Decode Base64 to get the participant name
+    }
+    return null;
+  }
+
+  // Function to reveal the assigned person based on URL query parameter
   function revealSanta() {
-    const participant = prompt("Enter your name:");
-    
+    const participant = getParticipantFromURL();
+
     if (participants.includes(participant)) {
       const assignedPerson = secretSantaAssignments[participant];
       document.getElementById("assignedPerson").textContent = `You are buying a gift for: ${assignedPerson}`;
@@ -85,6 +104,15 @@
       alert("Sorry, your name is not in the list. Please check the spelling or ask the organizer.");
     }
   }
+
+  // Automatically reveal the assignment when the page loads
+  document.addEventListener('DOMContentLoaded', () => {
+    const participant = getParticipantFromURL();
+    if (participant) {
+      revealSanta();
+    }
+  });
+
 </script>
 
 </body>
