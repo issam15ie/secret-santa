@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secret Santa Assignment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #2d87f0;
+    }
+    p {
+      font-size: 18px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #2d87f0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #1d6ccf;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Secret Santa Assignment</h1>
+  <p>Click the button to reveal who you are buying a gift for!</p>
+  <button onclick="revealSanta()">Reveal</button>
+  <p id="assignedPerson"></p>
+</div>
+
+<script>
+  // List of participants (You can update this with the names of your participants)
+  const participants = [
+    "Alice", "Bob", "Charlie", "David", "Eve", 
+    "Frank", "Grace", "Hannah", "Ivan", "Jack"
+  ];
+
+  // Randomly shuffle the participants and assign them
+  function assignSecretSanta() {
+    const shuffledParticipants = [...participants];
+    for (let i = shuffledParticipants.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledParticipants[i], shuffledParticipants[j]] = [shuffledParticipants[j], shuffledParticipants[i]];
+    }
+    
+    // Ensure no one is assigned to themselves
+    const assignments = {};
+    for (let i = 0; i < participants.length; i++) {
+      assignments[participants[i]] = shuffledParticipants[i === participants.length - 1 ? 0 : i + 1];
+    }
+    
+    return assignments;
+  }
+
+  // Store the assignments in a variable (this will be available for the page)
+  const secretSantaAssignments = assignSecretSanta();
+
+  // Function to reveal the assigned person
+  function revealSanta() {
+    const participant = prompt("Enter your name:");
+    
+    if (participants.includes(participant)) {
+      const assignedPerson = secretSantaAssignments[participant];
+      document.getElementById("assignedPerson").textContent = `You are buying a gift for: ${assignedPerson}`;
+    } else {
+      alert("Sorry, your name is not in the list. Please check the spelling or ask the organizer.");
+    }
+  }
+</script>
+
+</body>
+</html>
