@@ -6,45 +6,156 @@
   <title>Secret Santa Assignment</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
       text-align: center;
-      margin: 20px;
+      margin: 0;
+      padding: 0;
+      background: url('https://www.publicdomainpictures.net/pictures/30000/velka/snowflakes-background-1524661490bmZ.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
     }
-    .container {
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      background-color: #f9f9f9;
-    }
+
     h1 {
-      color: #2d87f0;
+      font-size: 3em;
+      color: #ff5c8e;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 40px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
     p {
-      font-size: 18px;
+      font-size: 20px;
+      margin: 20px 0;
     }
+
     button {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: #2d87f0;
+      padding: 15px 30px;
+      font-size: 20px;
+      background-color: #ff5c8e;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s;
     }
+
     button:hover {
-      background-color: #1d6ccf;
+      background-color: #f8c0c8;
+    }
+
+    .info {
+      font-size: 1.2em;
+      margin-top: 30px;
+      color: #f0e6a5;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    }
+
+    .tree {
+      font-size: 2em;
+      color: #ff8c00;
+      margin-top: 30px;
+    }
+
+    .tree i {
+      color: #f8c0c8;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+    }
+
+    .gift-box {
+      font-size: 1.5em;
+      margin-top: 20px;
+      color: #ffdf6b;
+    }
+
+    .gift-box i {
+      color: #ff5c8e;
+    }
+
+    /* Christmas tree animation */
+    .snowfall {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      animation: snowfall 10s linear infinite;
+    }
+
+    @keyframes snowfall {
+      0% {
+        top: -10%;
+      }
+      100% {
+        top: 100%;
+      }
+    }
+
+    /* For the snowflakes */
+    .snowflake {
+      position: absolute;
+      top: -50px;
+      font-size: 30px;
+      animation: snowflakes 10s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes snowflakes {
+      0% {
+        left: 0%;
+        top: -50px;
+      }
+      50% {
+        left: 50%;
+        top: 50%;
+      }
+      100% {
+        left: 100%;
+        top: 100%;
+      }
     }
   </style>
 </head>
 <body>
 
+<div class="snowfall">
+  <!-- Snowflakes -->
+  <div class="snowflake" style="left: 10%; animation-duration: 12s;">❄</div>
+  <div class="snowflake" style="left: 20%; animation-duration: 8s;">❄</div>
+  <div class="snowflake" style="left: 30%; animation-duration: 10s;">❄</div>
+  <div class="snowflake" style="left: 40%; animation-duration: 7s;">❄</div>
+  <div class="snowflake" style="left: 50%; animation-duration: 9s;">❄</div>
+  <div class="snowflake" style="left: 60%; animation-duration: 6s;">❄</div>
+  <div class="snowflake" style="left: 70%; animation-duration: 11s;">❄</div>
+  <div class="snowflake" style="left: 80%; animation-duration: 8s;">❄</div>
+</div>
+
 <div class="container">
   <h1>Secret Santa Assignment</h1>
   <p>Click the button below to reveal who you are buying a gift for!</p>
   <button onclick="revealSanta()">Reveal</button>
+  
   <p id="assignedPerson"></p>
+
+  <div class="info">
+    <p>🎄 You're warmly invited to the Christmas Dinner at Issam Eid's house on <strong>December 25th!</strong></p>
+    <p>🎁 The gifts will be placed under the tree there! Come join us for a magical evening!</p>
+  </div>
+
+  <div class="tree">
+    <i class="fa fa-tree"></i> <span>Christmas Tree</span>
+  </div>
+  
+  <div class="gift-box">
+    <i class="fa fa-gift"></i> <span>Gifts will be waiting for you under the tree!</span>
+  </div>
 </div>
 
 <script>
@@ -74,21 +185,12 @@
   // Store the assignments in a variable (this will be available for the page)
   const secretSantaAssignments = assignSecretSanta();
 
-  // Base64 encoding and decoding functions
-  function encodeBase64(str) {
-    return btoa(unescape(encodeURIComponent(str)));  // Encoding the name to Base64
-  }
-
-  function decodeBase64(encodedStr) {
-    return decodeURIComponent(escape(atob(encodedStr)));  // Decoding Base64 to get original name
-  }
-
   // Get the name from the URL parameters (e.g. ?name=QWxpY2U=)
   function getParticipantFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     const encodedName = urlParams.get('name');
     if (encodedName) {
-      return decodeBase64(encodedName);  // Decode Base64 to get the participant name
+      return decodeURIComponent(atob(encodedName));  // Decode Base64 to get the participant name
     }
     return null;
   }
@@ -112,7 +214,6 @@
       revealSanta();
     }
   });
-
 </script>
 
 </body>
