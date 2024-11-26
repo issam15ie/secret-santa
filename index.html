@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -137,10 +137,20 @@
       }
     }
 
+    /* Revealed name style */
+    #assignedPerson {
+      font-size: 2.5em;             /* Make the font size bigger */
+      font-weight: bold;            /* Make the text bold */
+      color: #ff5c8e;               /* Use a Christmas-like color */
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); /* Add shadow */
+      margin-top: 20px;             /* Add some space above */
+      transition: all 0.3s ease;    /* Smooth transition */
+    }
+
     /* Media queries for mobile responsiveness */
     @media (max-width: 768px) {
       h1 {
-        font-size: 2.5em; /* Smaller header text on mobile */
+        font-size: 2.5em;
       }
 
       button {
@@ -150,11 +160,11 @@
 
       .container {
         padding: 15px;
-        max-width: 90%; /* Increase width to fit screen on mobile */
+        max-width: 90%;
       }
 
       p {
-        font-size: 18px; /* Adjust text size for readability */
+        font-size: 18px;
       }
 
       .info {
@@ -163,14 +173,14 @@
       }
 
       .tree, .gift-box {
-        font-size: 1.3em; /* Slightly smaller for mobile */
+        font-size: 1.3em;
       }
     }
 
-    /* For very small mobile screens (e.g., 320px) */
+    /* For very small mobile screens */
     @media (max-width: 480px) {
       h1 {
-        font-size: 2em; /* Even smaller header text */
+        font-size: 2em;
       }
 
       .container {
@@ -200,6 +210,7 @@
 
 <div class="snowfall">
   <!-- Snowflakes -->
+  
   <div class="snowflake" style="left: 10%; animation-duration: 12s;">❄</div>
   <div class="snowflake" style="left: 20%; animation-duration: 8s;">❄</div>
   <div class="snowflake" style="left: 30%; animation-duration: 10s;">❄</div>
@@ -208,6 +219,45 @@
   <div class="snowflake" style="left: 60%; animation-duration: 6s;">❄</div>
   <div class="snowflake" style="left: 70%; animation-duration: 11s;">❄</div>
   <div class="snowflake" style="left: 80%; animation-duration: 8s;">❄</div>
+  
+   <div class="snowflake" style="right: 10%; animation-duration: 12s;">❄</div>
+  <div class="snowflake" style="right: 20%; animation-duration: 8s;">❄</div>
+  <div class="snowflake" style="right: 30%; animation-duration: 10s;">❄</div>
+  <div class="snowflake" style="right: 40%; animation-duration: 7s;">❄</div>
+  <div class="snowflake" style="right: 50%; animation-duration: 9s;">❄</div>
+  <div class="snowflake" style="right: 60%; animation-duration: 6s;">❄</div>
+  <div class="snowflake" style="right: 70%; animation-duration: 11s;">❄</div>
+  <div class="snowflake" style="right: 80%; animation-duration: 8s;">❄</div>
+  
+  
+  <div class="snowflake" style="center: 10%; animation-duration: 12s;">❄</div>
+  <div class="snowflake" style="center: 20%; animation-duration: 8s;">❄</div>
+  <div class="snowflake" style="center: 30%; animation-duration: 10s;">❄</div>
+  <div class="snowflake" style="center: 40%; animation-duration: 7s;">❄</div>
+  <div class="snowflake" style="center: 50%; animation-duration: 9s;">❄</div>
+  <div class="snowflake" style="center: 60%; animation-duration: 6s;">❄</div>
+  <div class="snowflake" style="center: 70%; animation-duration: 11s;">❄</div>
+  <div class="snowflake" style="center: 80%; animation-duration: 8s;">❄</div>
+  
+  <div class="snowflake" style="center: 10%; animation-duration: 8s;">❄</div>
+  <div class="snowflake" style="center: 20%; animation-duration: 8s;">❄</div>
+  <div class="snowflake" style="center: 30%; animation-duration: 8s;">❄</div>
+  <div class="snowflake" style="center: 40%; animation-duration: 8s;">❄</div>
+  <div class="snowflake" style="center: 50%; animation-duration: 8s;">❄</div>
+  <div class="snowflake" style="center: 60%; animation-duration: 8s;">❄</div>
+  <div class="snowflake" style="center: 70%; animation-duration: 8s;">❄</div>
+  <div class="snowflake" style="center: 80%; animation-duration: 8s;">❄</div>
+  
+  
+    
+  <div class="snowflake" style="center: 10%; animation-duration: 5s;">❄</div>
+  <div class="snowflake" style="center: 20%; animation-duration: 5s;">❄</div>
+  <div class="snowflake" style="center: 30%; animation-duration: 5s;">❄</div>
+  <div class="snowflake" style="center: 40%; animation-duration: 5s;">❄</div>
+  <div class="snowflake" style="center: 50%; animation-duration: 5s;">❄</div>
+  <div class="snowflake" style="center: 60%; animation-duration: 5s;">❄</div>
+  <div class="snowflake" style="center: 70%; animation-duration: 5s;">❄</div>
+  <div class="snowflake" style="center: 80%; animation-duration: 5s;">❄</div>
 </div>
 
 <div class="container">
@@ -215,7 +265,7 @@
   <p>Click the button below to reveal who you are buying a gift for!</p>
   <button onclick="revealSanta()">Reveal</button>
   
-  <p id="assignedPerson"></p>
+  <p id="assignedPerson"></p> <!-- Revealed name will be inserted here -->
 
   <div class="info">
     <p>🎄 You're warmly invited to the Christmas Dinner at Issam Eid's house on <strong>December 25th!</strong></p>
@@ -232,61 +282,44 @@
 </div>
 
 <script>
-  // List of participants (update this with the names of your participants)
-  const participants = [
-    "Alice", "Bob", "Charlie", "David", "Eve", 
-    "Frank", "Grace", "Hannah", "Ivan", "Jack"
-  ];
+  // Secret Santa assignments
+  const secretSantaAssignments = {
+    "Dania": "Fadi",
+    "Fadi": "Issam",
+    "Issam": "Elias",
+    "Elias": "Jelyssa",
+    "Jelyssa": "Sarkis",
+    "Sarkis": "Dianne",
+    "Dianne": "Nivine",
+    "Nivine": "Marie-Jeanne",
+    "Shadi": "Dania"
+  };
 
-  // Randomly shuffle the participants and assign them
-  function assignSecretSanta() {
-    const shuffledParticipants = [...participants];
-    for (let i = shuffledParticipants.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffledParticipants[i], shuffledParticipants[j]] = [shuffledParticipants[j], shuffledParticipants[i]];
-    }
-    
-    // Ensure no one is assigned to themselves
-    const assignments = {};
-    for (let i = 0; i < participants.length; i++) {
-      assignments[participants[i]] = shuffledParticipants[i === participants.length - 1 ? 0 : i + 1];
-    }
-    
-    return assignments;
-  }
-
-  // Store the assignments in a variable (this will be available for the page)
-  const secretSantaAssignments = assignSecretSanta();
-
-  // Get the name from the URL parameters (e.g. ?name=QWxpY2U=)
-  function getParticipantFromURL() {
+  // Decode the Base64 name from URL
+  function decodeNameFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     const encodedName = urlParams.get('name');
     if (encodedName) {
-      return decodeURIComponent(atob(encodedName));  // Decode Base64 to get the participant name
+      const decodedName = atob(encodedName); // Decode Base64 to get the participant name
+      console.log("Decoded Name:", decodedName); // Debugging output
+      return decodedName;
     }
     return null;
   }
 
   // Function to reveal the assigned person based on URL query parameter
   function revealSanta() {
-    const participant = getParticipantFromURL();
-
-    if (participants.includes(participant)) {
+    const participant = decodeNameFromURL();
+    if (participant && secretSantaAssignments[participant]) {
       const assignedPerson = secretSantaAssignments[participant];
-      document.getElementById("assignedPerson").textContent = `You are buying a gift for: ${assignedPerson}`;
+      document.getElementById("assignedPerson").textContent = `${assignedPerson}`;
     } else {
       alert("Sorry, your name is not in the list. Please check the spelling or ask the organizer.");
     }
   }
 
-  // Automatically reveal the assignment when the page loads
-  document.addEventListener('DOMContentLoaded', () => {
-    const participant = getParticipantFromURL();
-    if (participant) {
-      revealSanta();
-    }
-  });
+
+
 </script>
 
 </body>
