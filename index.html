@@ -281,22 +281,21 @@
   </div>
 </div>
 
+<audio id="hoHoHoSound" src="hohoho.mp3" preload="auto"></audio>
+
 <script>
   // Secret Santa assignments
-const secretSantaAssignments = {
-  "Dania": "Fadi",
-  "Fadi": "Dania",
-  "Issam": "Elias",
-  "Elias": "Issam",
-  "Jelyssa": "Sarkis",
-  "Sarkis": "MarieJeanne",
-  "Dianne": "Dianne",
-  "Nivine": "Nivine",
-  "Shadi": "Shadi",
-  "MarieJeanne": "Jelyssa"
-};
-
-  
+  const secretSantaAssignments = {
+    "Dania": "Fadi",
+    "Fadi": "Issam",
+    "Issam": "Elias",
+    "Elias": "Jelyssa",
+    "Jelyssa": "Sarkis",
+    "Sarkis": "Dianne",
+    "Dianne": "Nivine",
+    "Nivine": "Marie-Jeanne",
+    "Shadi": "Dania"
+  };
 
   // Decode the Base64 name from URL
   function decodeNameFromURL() {
@@ -316,6 +315,8 @@ const secretSantaAssignments = {
     if (participant && secretSantaAssignments[participant]) {
       const assignedPerson = secretSantaAssignments[participant];
       document.getElementById("assignedPerson").textContent = `${assignedPerson}`;
+	  const hoHoHoSound = document.getElementById("hoHoHoSound");
+      hoHoHoSound.play();  // This will play the sound
     } else {
       alert("Sorry, your name is not in the list. Please check the spelling or ask the organizer.");
     }
