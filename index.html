@@ -90,10 +90,67 @@
       color: #ffdf6b;
     }
 
-    .gift-box i {
-      color: #ff5c8e;
-    }
+.gift-box-1 {
+  font-size: 1.5em;
+  margin-top: 20px;
+  width: 50px;  /* Default width for larger screens */
+  height: 50px;  /* Default height to make it square */
+  background-image: url('box.jpg');  /* Replace with actual image URL */
+  background-size: cover;  /* Ensures the image covers the entire box */
+  background-position: center;  /* Centers the image */
+  color: white;
+  cursor: pointer;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  position: fixed;  /* Make it fixed at the bottom of the page */
+  bottom: 20px;     /* Space from the bottom */
+  left: 50%;
+  transform: translateX(-50%); /* Center the box horizontally */
+}
 
+.gift-box-1:hover {
+  opacity: 0.9;  /* Slightly fade on hover */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .gift-box-1 {
+    width: 150px;  /* Reduce size for mobile screens */
+    height: 150px;  /* Keep the box square */
+    font-size: 1.2em;  /* Adjust font size */
+  }
+}
+
+/* For very small screens (like portrait mobile phones) */
+@media (max-width: 480px) {
+  .gift-box-1 {
+    width: 120px;  /* Further reduce size */
+    height: 120px;  /* Keep it square */
+    font-size: 1em;  /* Adjust font size */
+  }
+}
+
+
+	
+   .santa-appear {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      background-image: url('christmas-ho-ho-ho.gif');
+      background-size: cover;
+      display: none;
+      animation: slapAnimation 2s ease-in-out forwards;
+    }
+	
+	
     /* Snowfall animation */
     .snowfall {
       position: absolute;
@@ -259,6 +316,12 @@
   <div class="snowflake" style="center: 70%; animation-duration: 5s;">❄</div>
   <div class="snowflake" style="center: 80%; animation-duration: 5s;">❄</div>
 </div>
+<!-- Gift box with Arabic text "ماتكبسها" -->
+<div class="gift-box-1" id="giftBox">ماتكبسها</div>
+
+
+<!-- Santa Claus animated slap -->
+<div class="santa-appear" id="santa"></div>
 
 <div class="container">
   <h1>Secret Santa Assignment</h1>
@@ -328,7 +391,15 @@
     }
   };
 
-
+  document.getElementById("giftBox").addEventListener("click", function() {
+    const santa = document.getElementById("santa");
+    santa.style.display = "block";
+    
+    // Trigger animation
+    setTimeout(function() {
+      santa.style.display = "none";  // Hide Santa after animation
+    }, 2000); // Hide after the animation ends (2 seconds)
+  });
 </script>
 
 </body>
