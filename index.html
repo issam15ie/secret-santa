@@ -89,13 +89,12 @@
       margin-top: 20px;
       color: #ffdf6b;
     }
-
 .gift-box-1 {
   font-size: 1.5em;
   margin-top: 20px;
-  width: 25px;  /* Default width for larger screens */
-  height: 25px;  /* Default height to make it square */
-  background-image: url('box.jpg');  /* Replace with actual image URL */
+  width: 200px;  /* Default width */
+  height: 200px;  /* Default height to make it square */
+  background-image: url('box.jpg'); /* Replace with actual image URL */
   background-size: cover;  /* Ensures the image covers the entire box */
   background-position: center;  /* Centers the image */
   color: white;
@@ -106,34 +105,42 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;  /* This stacks the text above the image */
   font-weight: bold;
-  position: fixed;  /* Make it fixed at the bottom of the page */
-  bottom: 20px;     /* Space from the bottom */
-  left: 50%;
-  transform: translateX(-50%); /* Center the box horizontally */
+  position: fixed;
+  bottom: 20px;  /* Space from the bottom */
+  left: 7%;
+  transform: translateX(-50%); /* Center horizontally */
+  padding: 10px;
+  z-index: 10;
+}
+
+.gift-box-1 .text {
+  z-index: 2;  /* Ensure text is above image */
 }
 
 .gift-box-1:hover {
-  opacity: 0.9;  /* Slightly fade on hover */
+  opacity: 0.9;  /* Slight fade effect on hover */
 }
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .gift-box-1 {
-    width: 150px;  /* Reduce size for mobile screens */
-    height: 150px;  /* Keep the box square */
+    width: 25px;  /* Reduce size for mobile screens */
+    height: 25px;  /* Keep it square */
     font-size: 1.2em;  /* Adjust font size */
   }
 }
 
-/* For very small screens (like portrait mobile phones) */
+/* For very small screens */
 @media (max-width: 480px) {
   .gift-box-1 {
-    width: 120px;  /* Further reduce size */
-    height: 120px;  /* Keep it square */
+    width: 25px;  /* Further reduce size */
+    height: 25px;  /* Keep square */
     font-size: 1em;  /* Adjust font size */
   }
 }
+
 
 
 	
@@ -317,7 +324,10 @@
   <div class="snowflake" style="center: 80%; animation-duration: 5s;">❄</div>
 </div>
 <!-- Gift box with Arabic text "ماتكبسها" -->
-<div class="gift-box-1" id="giftBox">ماتكبسها</div>
+<div class="gift-box-1" id="giftBox">
+  <div class="text">ما تكبسها</div>  <!-- Text on top -->
+</div>
+
 
 
 <!-- Santa Claus animated slap -->
