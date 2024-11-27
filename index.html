@@ -262,7 +262,7 @@
 
 <div class="container">
   <h1>Secret Santa Assignment</h1>
-  <p>Click the button below to reveal who you are buying a gift for!</p>
+ <p id="personId"></p> <p>Click the button below to reveal who you are buying a gift for!</p>
   <button onclick="revealSanta()">Reveal</button>
   
   <p id="assignedPerson"></p> <!-- Revealed name will be inserted here -->
@@ -321,7 +321,12 @@
       alert("Sorry, your name is not in the list. Please check the spelling or ask the organizer.");
     }
   }
-
+  window.onload = function() {
+  const participant = decodeNameFromURL();
+    if (participant) {
+      document.getElementById("personId").textContent = `Hello, ${participant}!`;
+    }
+  };
 
 
 </script>
